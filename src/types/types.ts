@@ -50,7 +50,8 @@ export type RelationalAttendance = Partial<Attendance> & {
 
 export type Position = {
   lat: number;
-  long: number;
+  long: number; 
 }
 
+// this is what the student can report themselves
 export type StudentAttendanceTypes = 'check_in' | 'self_excuse';

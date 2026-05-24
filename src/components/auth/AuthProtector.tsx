@@ -6,8 +6,14 @@ import { useAuth } from '@/components/auth/AuthProvider';
 import { privateRoutes } from '@/lib/util/config';
 import Auth from './Auth';
 import { cn, isAuthorized } from '@/types/types';
-import LoadingComponent from '../ui/LoadingComponent';
+//import LoadingComponent from '../ui/LoadingComponent';
 import { useNotification } from '../notification/NotificationProvider';
+
+const LoadingComponent = () => (
+  <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white">
+    Loading...
+  </div>
+);
 
 interface AuthProtecterProps {
   children: React.ReactNode;

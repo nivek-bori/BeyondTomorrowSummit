@@ -25,7 +25,6 @@ export const config = {
 
 export const privateRoutes: Record<string, Role> = {
   '/api': 'USER',
-  '/': 'USER',
-  '/developer': 'ADMIN',
-  '/developer_kevin': 'ADMIN',
+  // '/': 'USER',
+  '/kevin_developer': 'USER',
 };

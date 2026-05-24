@@ -77,7 +77,7 @@ async function handleSelfExcuse(userId: string, eventId: string): Promise<NextRe
   }
 }
 
-export async function post(request: Request) {
+export async function POST(request: Request) {
   try {
     // User
     const { user, response } = await getUserServer(request);
