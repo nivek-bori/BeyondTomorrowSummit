@@ -1,13 +1,70 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../src/lib/prisma/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Profile {
+  id               String             @id @default(uuid())
+  role             Role               @default(USER)
+  email            String             @unique
+  name             String?
+
+  teachingCoursees Course[]             @relation("CourseTeacher")
+  enrolledCoursees Course[]             @relation("CourseStudents")
+  attendances     Attendance[]
+}
+
+model Course {
+  id        String    @id @default(uuid())
+  name      String
+  teacherId String
+  teacher   Profile   @relation("CourseTeacher", fields: [teacherId], references: [id])
+  students  Profile[] @relation("CourseStudents")
+  events    Event[]
+}
+
+model Event {
+  id               String    @id @default(uuid())
+  name             String
+  startTime        DateTime
+  endTime          DateTime
+  teacherLocationLat   Float?
+  teacherLocationLong  Float?
+
+  courseId String
+  course   Course   @relation(fields: [courseId], references: [id])
+
+  attendances Attendance[]
+}
+
+model Attendance {
+  id String @id @default(uuid())
+
+  type AttendanceType @default(UNKNOWN)
+
+  studentId String
+  student   Profile @relation(fields: [studentId], references: [id])
+
+  eventId String
+  event   Event   @relation(fields: [eventId], references: [id])
+
+  @@unique([studentId, eventId])
+}
+
+enum Role {
+  ADMIN
+  USER
+  GUEST
+}
+
+enum AttendanceType {
+  IN_PERSON
+  ONLINE
+  SELF_EXCUSED
+  ABSENT
+  UNKNOWN
 }

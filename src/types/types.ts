@@ -1,3 +1,5 @@
+import { Attendance, AttendanceType, Course, Profile } from "@/lib/prisma/generated/prisma/client";
+
 export function cn(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(' ');
 }
@@ -24,3 +26,31 @@ export function isAuthorized(currentRole?: string | null, requiredRole?: string 
   const required = normalizeRole(requiredRole);
   return roleRank[current] >= roleRank[required];
 }
+
+export type RelationalProfile = Partial<Profile> & {
+  teacher?: Partial<Course>;
+  events?: Partial<Event>[];
+}
+
+export type RelationalCourse = Partial<Course> & {
+  teacher?: Partial<Profile>;
+  students?: Partial<Profile>[];
+  events?: Partial<Event>[];
+}
+
+export type RelationalEvent = Partial<Event> & {
+  course?: Partial<Course>;
+  attendances?: Partial<Attendance>[];
+}
+
+export type RelationalAttendance = Partial<Attendance> & {
+  student?: Partial<Profile>;
+  event?: Partial<Event>;
+}
+
+export type Position = {
+  lat: number;
+  long: number;
+}
+
+export type StudentAttendanceTypes = 'check_in' | 'self_excuse';

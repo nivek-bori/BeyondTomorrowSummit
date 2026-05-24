@@ -1,4 +1,4 @@
-import { bg_blue, bg_green, bg_red } from "@/types/styles"
+import { bg_blue, bg_green, bg_red } from "@/types/styles";
 import { X } from "lucide-react";
 
 export type NotificationType = 'success' | 'error' | 'info';
