@@ -29,6 +29,29 @@ export function ScheduleComponent({ events }: { events: Event[] }) {
     );
 }
 
+export function CourseItemComponent({ course }: { course: Course }) {
+    return (
+        <button className="course">
+            <a href="/teacher-dashboards/{class}" className="a-link-normal">
+                <p className='font-bold'>{course.name}</p>
+                <p>{course.startTime}</p>
+                <p>{course.endTime}</p>
+            </a>
+        </button>
+    );
+}
+
+
+export function CourseListComponent({ courses }: { courses: Course[] }) {
+    return (
+        <div className='w-full h-full'>
+            {courses.map((course) => (
+                <CourseItemComponent key={course.id} course={course} />
+            ))}
+        </div>
+    );
+}
+
 export default function DashboardComponent({ role, courses, events }: { role: string, courses: Course[], events: Event[] }) {
 
     return (
@@ -54,6 +77,7 @@ export default function DashboardComponent({ role, courses, events }: { role: st
             </div>
 
             <div className="Scehdule">
+                
                 <ScheduleComponent></ScheduleComponent>
 
                 {/* <h1>Schedule</h1>
