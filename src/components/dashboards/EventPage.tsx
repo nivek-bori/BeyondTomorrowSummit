@@ -63,10 +63,10 @@ export function EventDashboard ({ events }: { events: Event[] }) {
                 <Navbar />
             </div>
 
-            <div className="event">
+            <div className="event" style={{ textAlign: "left" }}>
                 <CheckInComponent></CheckInComponent>
             </div>
-            <div className="event">
+            <div className="event" style={{ textAlign: "right" }}>
                 <ExcuseButton></ExcuseButton>
             </div>
         </div>
