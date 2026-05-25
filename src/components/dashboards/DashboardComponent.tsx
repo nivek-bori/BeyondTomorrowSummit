@@ -1,8 +1,8 @@
 // components can only take one paramenter, if you want to give it multiple parameters you have to do it in an object
 // {} ← this is an object
 
-import { Course, Event } from "@/lib/prisma/generated/prisma/client";
-
+import { Course, Event } from "@/prisma/schema.prisma
+import Navbar from "./Navbar"
 // { name } : { name: string }
 // to specify the type of the object, put ":" after the object ans specify the datatypes of the things in the object
 
@@ -56,12 +56,12 @@ export default function DashboardComponent({ role, courses, events }: { role: st
 
     return (
         <div>
-            <p className="intro">
-                <h1 className="a-size-large a-spacing-small">Welcome to your {role} dashboard!</h1>
-            </p>
+            <div className="navbar">
+                <Navbar />
+            </div> 
 
-            <div className="classes">
-                <CourseListComponent></CourseListComponent>
+            <div className="classes" style={{ textAlign: 'left' }}>
+                <CourseListComponent courses={courses} />
 
                 {/* <h1>Classes</h1> */}
 
@@ -76,9 +76,9 @@ export default function DashboardComponent({ role, courses, events }: { role: st
             </table> */}
             </div>
 
-            <div className="Scehdule">
+            <div className="Scehdule" style={{ textAlign: 'right' }}>
                 
-                <ScheduleComponent></ScheduleComponent>
+                <ScheduleComponent events={events} />
 
                 {/* <h1>Schedule</h1>
                 <table>
@@ -91,5 +91,5 @@ export default function DashboardComponent({ role, courses, events }: { role: st
                 </table> */}
             </div>
         </div >
-    )
+    );
 }
